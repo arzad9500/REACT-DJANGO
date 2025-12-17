@@ -1,0 +1,27 @@
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* header */
+*{
+    background-color: rgb(45, 52, 54);
+}
+
+/* main */
+.inside-div{
+    background-color: rgb(87, 101, 116);
+
+}
+
+.text-primary,.text-light{
+ background-color: transparent;
+}
+
+/* register */
+
+/* .reg-inner-container{
+    background-color: rgb(87, 101, 116);
+} */
