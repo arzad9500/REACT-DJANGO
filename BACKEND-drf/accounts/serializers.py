@@ -13,6 +13,12 @@ class Userserializers (serializers.ModelSerializer):
         model =User
         fields =["username","email","password"]  # this is the order
 
+    def validate_username(self, value): # check same username , it from frontend (doubt)
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("Username already exists")
+        return value
+
+
     def create(self, validated_data):
         # User.objects. create = save the password in a plain text
         # User.objects.create_user = automatically hash the password in db
