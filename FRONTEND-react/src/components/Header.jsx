@@ -2,13 +2,13 @@ import React from 'react'
 import "../assets/css/header.css"
 import { Button } from './Button'
 import { Link } from 'react-router-dom'
-import { AuthContext } from './AuthProvider'
-import { useContext } from 'react'
+import { AuthContext } from './AuthProvider'  //
+import { useContext } from 'react'            // 
 import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
 
-  const {isLoggedin, setIsLoggedin} = useContext(AuthContext) // this is from Auth provider
+  const {isLoggedin, setIsLoggedin} = useContext(AuthContext)// // this is from Auth provider
   const navigate = useNavigate  
 
   const handleLogout = () =>{
@@ -16,7 +16,7 @@ export const Header = () => {
     localStorage.removeItem("refreshToken")
     console.log('loggedd out')
     setIsLoggedin(false)
-    navigate("/login")
+    navigate("/login")  // after logout it goes to login page
   }
 
   return (
@@ -29,8 +29,12 @@ export const Header = () => {
 
           {/* here text and cls is naming convension */}
         <div className="">
-          {isLoggedin ? ( /* if we log in we can see the logout button*/
+          {isLoggedin ? ( /* if we log in we can see the logout button , dashboard also*/
+          <>
+            <Button text="Dashboard" cls="btn-primary" url="/dashboard" />
+            &nbsp;
             <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
+          </>
           ): (
             // down this empty fragemet for else part no need two  element
             <> 

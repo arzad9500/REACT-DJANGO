@@ -12,27 +12,38 @@ export const Register = () => {
     const [success , setSuccess] = useState(false) 
     const [loading, setLoading] = useState(false)
 
-    const handleRegistation =async (e) =>{
+    const handleRegistation = async (e) =>{
         e.preventDefault()
         setLoading(true)
-        // console.log("test")
+        // console.log("==>test")
 
-        const userdata = {username, email, password}
-        // console.log("this is userdata in console",userdata)
+        const userdata = {username, email, password}  // this all fields in default user module so we use this to backend url
+        // console.log("==>this is userdata in console",userdata)
         
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/api/v1/register/",userdata); // await is wait for backend response
-      console.log("Response:", response.data);
-      setError({})
-      setSuccess(true)
-    //   console.log("this is done")
-       
-    } catch (error) {
-        setError(error.response.data)
-      console.error("Error:",error.response?.data || error.message);
-    }finally{
-        setLoading(false)
-    }
+        try { // this is backend endpoint // await is wait for backend response
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/register/",userdata);  // this is save in the backend
+        console.log("Response==>", response.data);
+        setError({})
+        setSuccess(true)
+        setUsername("")
+        setPassword("")
+        setEmail("")
+        //   console.log("this is done")
+        
+        } catch (error) {
+        if (error.response) {
+            setError(error.response.data);
+            console.error("Backend Error==>", error.response.data);
+        } else if (error.request) {
+            setError({ message: "Server not responding" });
+            console.error("No Response==>", error.request);
+        } else {
+            setError({ message: error.message });
+            console.error("Error==>", error.message);
+        }
+            }finally{
+            setLoading(false)
+        }
 
     }
 

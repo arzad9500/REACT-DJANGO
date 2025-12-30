@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./AuthProvider";  // inside we will provide
+import { AuthContext } from "./AuthProvider";  // inside we will provide isLoggedin and setIsLoggedin
 
 
 export const Login = () => {
@@ -13,7 +13,7 @@ export const Login = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate() // take navigate and store into navigate variable
     const [error, setError] = useState("");
-    const {isLoggedin, setIsLoggedin} = useContext(AuthContext) // this is from Auth provider 
+    const {isLoggedin, setIsLoggedin} = useContext(AuthContext)// // this is from Auth provider 
     
 
     const handleLogin = async (e) => {
@@ -21,19 +21,22 @@ export const Login = () => {
         setLoading(true)
 
       const userdata = { username, password };
-      console.log(userdata)
+      console.log("userdata ==>",userdata)
 
-    try { // if same username and pass is available it give access and refresh token
-      const response = await axios.post("http://127.0.0.1:8000/api/v1/token/",userdata); // await is wait for backend response
-      localStorage.setItem("accessToken",response.data.access) // accessToken is  key and data is value in local storage
+    try {
+      // if same username and password is available(same) it give access and refresh token , same 
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/token/",
+        userdata
+      ); // await is wait for backend response
+      localStorage.setItem("accessToken", response.data.access); // accessToken is key and response.data.access is from backend responseand and save that in local storage
       localStorage.setItem("refreshToken", response.data.refresh);
-      console.log("Response:", response.data);
-      setIsLoggedin(true)
-      navigate("/")  // home page route
-        
+      console.log("Response==>", response.data);
+      setIsLoggedin(true);
+      navigate("/"); // home page route
     } catch (error) {
-        console.error("invalid credentisal"); // console.error is show red color 
-      setError("invalid credentisal");
+        console.error("invalid credentials"); // console.error is show red color 
+        setError("invalid credentials");
     }finally{
         setLoading(false)
     }
@@ -59,7 +62,7 @@ export const Login = () => {
                         <button type='submit' className='btn btn-info d-block mx-auto' disabled> <FontAwesomeIcon icon={faSpinner} spin />pleace wait ...</button> // Prevents the button from being clicked
                     ) : 
                     <button type='submit' className='btn btn-info d-block mx-auto' >Login</button>
-                    }
+                    } 
                 </form>
             </div>
         </div>

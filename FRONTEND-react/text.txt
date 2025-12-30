@@ -1,0 +1,9 @@
+in backend we use default user model , then 
+in fd register we use username , email, password the fields are in user model and save in db , then
+in fd login if same username and password is available it return refresh token and access token , save in local storage , then
+@ in fd use context hook (use context)6.28-6.34(Auth context) to access login status in all component
+in bd we create protected-view , if we want to use protected-view api we sent access token with the api  --> how we get access token we sent our username and password to the token api then it will give that tokens
+
+if we login with correct username and password it go to the dashboard , the dashboard has useeffect it will automatic run -- > it will call the protected api with
+
+@ in fd axios instance check 7.17 

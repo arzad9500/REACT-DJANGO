@@ -8,7 +8,6 @@ import { Footer } from "./Footer";
 export const Main = () => {
   return (
     <>
-      
       <div className="container m-5">
         <div className="text-center p-5 rounded inside-div">
           <h2 className="text-primary">stoct-predection-app</h2>
@@ -18,10 +17,9 @@ export const Main = () => {
             animi rem nostrum optio aliquam, praesentium commodi labore,
             molestiae sed. Repellendus, numquam?
           </p>
-          <Button text="Login" cls="btn-primary" />
+          <Button text="Explore" cls="btn-primary" url="/dashboard" />
         </div>
       </div>
-      
     </>
   );
 }
